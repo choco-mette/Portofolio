@@ -114,12 +114,12 @@
             <div class="brutal-border brutal-shadow bg-retro-blue h-48 rounded-2xl overflow-hidden relative group cursor-pointer">
                 <!-- Using a placeholder image for the avatar -->
                 <img src="https://images.unsplash.com/photo-1550439062-609e1531270e?ixlib=rb-4.0.3&auto=format&fit=crop&w=500&q=80" alt="Code setup" class="w-full h-full object-cover grayscale contrast-125 group-hover:grayscale-0 transition-all duration-300">
-                <div class="absolute bottom-2 left-2 bg-warm-white brutal-border px-2 py-1 text-xs font-mono font-bold">Status: Online</div>
+                <div class="absolute bottom-2 left-2 bg-warm-white brutal-border px-2 py-1 text-xs font-mono font-bold">Status: Still Alive</div>
             </div>
             
             <!-- Core Stack -->
             <div class="brutal-border brutal-shadow bg-warm-white p-6 rounded-2xl flex-grow flex flex-col justify-center">
-                <h3 class="font-display font-bold text-xl uppercase mb-3 border-b-4 border-[#1A1A1A] pb-2">Tools</h3>
+                <h3 class="font-display font-bold text-xl uppercase mb-3 border-b-4 border-[#1A1A1A] pb-2">Tech Stack</h3>
                 <div class="flex flex-wrap gap-2 font-mono text-xs font-bold uppercase">
                     <span class="bg-[#9D4EDD] text-white px-2 py-1 brutal-border rounded-lg hover:-translate-y-1 hover:shadow-[2px_2px_0px_#1a1a1a] transition-all cursor-default">PHP</span>
                     <span class="bg-terracotta text-warm-white px-2 py-1 brutal-border rounded-lg hover:-translate-y-1 hover:shadow-[2px_2px_0px_#1a1a1a] transition-all cursor-default">Laravel</span>
@@ -153,7 +153,7 @@
             <!-- SECTION 1: WORKS (Karya Profesional) -->
             <section id="works">
                 <div class="flex items-end justify-between mb-8 border-b-4 border-[#1A1A1A] pb-4">
-                    <h2 class="font-display font-black text-4xl uppercase">Work Experience</h2>
+                    <h2 class="font-display font-black text-4xl uppercase">Experience</h2>
                     <div class="font-mono font-bold text-sm bg-warm-white brutal-border px-3 py-1 rounded-full">Career</div>
                 </div>
 
@@ -249,7 +249,7 @@
             <!-- SECTION 2: PROJECTS (Proyek Personal/Eksperimen) -->
             <section id="projects">
                 <div class="flex items-end justify-between mb-8 border-b-4 border-[#1A1A1A] pb-4">
-                    <h2 class="font-display font-black text-4xl uppercase">Side Projects</h2>
+                    <h2 class="font-display font-black text-4xl uppercase">Projects</h2>
                     <div class="font-mono font-bold text-sm bg-warm-white brutal-border px-3 py-1 rounded-full">Experiments</div>
                 </div>
 
