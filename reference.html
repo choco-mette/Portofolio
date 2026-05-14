@@ -1,0 +1,207 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tomodachi - Portfolio & Journal</title>
+    
+    <script src="https://cdn.tailwindcss.com"></script>
+    
+    <!-- Mengambil Font Klasik dari Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <!-- Playfair Display untuk gaya judul koran, Courier Prime untuk teks mesin tik -->
+    <link href="https://fonts.googleapis.com/css2?family=Courier+Prime:ital,wght@0,400;0,700;1,400&family=Playfair+Display:ital,wght@0,600;0,800;1,600&display=swap" rel="stylesheet">
+    
+    <style>
+        /* Pengaturan Tema Kertas Vintage */
+        :root {
+            --paper-bg: #f5f2eb;
+            --ink-black: #2b2826;
+            --faded-red: #9e3b22;
+            --border-ink: #3a3633;
+        }
+
+        body {
+            background-color: var(--paper-bg);
+            color: var(--ink-black);
+            background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.8' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)' opacity='0.05'/%3E%3C/svg%3E");
+        }
+
+        /* Typography Classes */
+        .font-headline {
+            font-family: 'Playfair Display', serif;
+        }
+        
+        .font-typewriter {
+            font-family: 'Courier Prime', monospace;
+        }
+
+        /* Efek Hover Link ala Jurnalistik */
+        .ink-link {
+            text-decoration: none;
+            box-shadow: inset 0 -2px 0 var(--faded-red);
+            transition: box-shadow 0.2s ease-in-out, color 0.2s;
+        }
+        .ink-link:hover {
+            box-shadow: inset 0 -1.5em 0 var(--faded-red);
+            color: #fff;
+        }
+
+        /* Batas Garis Ganda ala Koran */
+        .border-double-ink {
+            border-style: double;
+            border-color: var(--border-ink);
+        }
+    </style>
+</head>
+<body class="antialiased min-h-screen py-8 px-4 md:px-8 flex justify-center">
+
+    <!-- Wrapper Utama: Dibatasi lebarnya agar enak dibaca seperti selembar dokumen -->
+    <div class="max-w-5xl w-full">
+
+        <!-- HEADER / MASTHEAD -->
+        <header class="border-b-4 border-double-ink pb-6 mb-8 text-center">
+            <p class="font-typewriter text-xs uppercase tracking-[0.2em] mb-4 text-[#5a544f]">Vol. 1 — Edisi Developer</p>
+            <h1 class="font-headline text-5xl md:text-7xl font-extrabold uppercase tracking-tight mb-2">Tomodachi.</h1>
+            <p class="font-headline italic text-lg md:text-xl text-[#5a544f]">Backend Architecture, Linux Server, & Lo-Fi Notes</p>
+            
+            <div class="flex justify-center gap-6 mt-6 font-typewriter text-sm font-bold border-t border-b border-[#3a3633] py-2">
+                <a href="#about" class="hover:text-[#9e3b22] transition-colors">Profile</a>
+                <a href="#projects" class="hover:text-[#9e3b22] transition-colors">Selected Works</a>
+                <a href="#journal" class="hover:text-[#9e3b22] transition-colors">Medium Journal</a>
+                <a href="#" class="hover:text-[#9e3b22] transition-colors">Contact</a>
+            </div>
+        </header>
+
+        <!-- MAIN LAYOUT (Grid Kolom ala Koran) -->
+        <main class="grid grid-cols-1 md:grid-cols-12 gap-8 md:gap-12">
+
+            <!-- KOLOM KIRI (Besar) : Artikel Blog & Pekerjaan Utama -->
+            <div class="md:col-span-8 space-y-12">
+                
+                <!-- Section Blog (Tempat untuk Medium Feed nanti) -->
+                <section id="journal">
+                    <div class="flex items-end justify-between border-b-2 border-[#3a3633] pb-2 mb-6">
+                        <h2 class="font-headline text-3xl font-bold">Latest Dispatches</h2>
+                        <span class="font-typewriter text-xs uppercase">From Medium</span>
+                    </div>
+
+                    <!-- List Artikel -->
+                    <div class="space-y-8">
+                        <!-- Artikel 1 -->
+                        <article class="group cursor-pointer">
+                            <p class="font-typewriter text-xs text-[#9e3b22] mb-1">May 12, 2026 • 5 min read</p>
+                            <h3 class="font-headline text-2xl font-bold mb-2 group-hover:text-[#9e3b22] transition-colors">Membangun Microservices yang Tangguh dengan FastAPI dan Docker</h3>
+                            <p class="font-typewriter text-sm leading-relaxed text-[#4a4542] mb-3">
+                                Catatan perjalanan memecah monolit menjadi layanan mandiri. Mengapa Nginx sebagai reverse proxy adalah sahabat terbaik engineer, dan bagaimana orkestrasi container menyelamatkan akhir pekan saya.
+                            </p>
+                            <a href="#" class="font-typewriter text-xs font-bold uppercase tracking-wider ink-link">Read Full Article -></a>
+                        </article>
+
+                        <!-- Garis pemisah antar artikel -->
+                        <hr class="border-[#d9d4c5] border-dashed">
+
+                        <!-- Artikel 2 -->
+                        <article class="group cursor-pointer">
+                            <p class="font-typewriter text-xs text-[#9e3b22] mb-1">April 28, 2026 • 4 min read</p>
+                            <h3 class="font-headline text-2xl font-bold mb-2 group-hover:text-[#9e3b22] transition-colors">Kenyamanan CLI: Tinggalkan GUI, Kembali ke Terminal</h3>
+                            <p class="font-typewriter text-sm leading-relaxed text-[#4a4542] mb-3">
+                                Refleksi pribadi tentang efisiensi bekerja murni menggunakan Bash dan Vim. Sebuah panduan ringan untuk merapikan dotfiles dan menciptakan environment yang tidak berisik.
+                            </p>
+                            <a href="#" class="font-typewriter text-xs font-bold uppercase tracking-wider ink-link">Read Full Article -></a>
+                        </article>
+                    </div>
+                </section>
+
+                <!-- Section Projects -->
+                <section id="projects">
+                    <div class="flex items-end justify-between border-b-2 border-[#3a3633] pb-2 mb-6">
+                        <h2 class="font-headline text-3xl font-bold">Selected Works</h2>
+                        <span class="font-typewriter text-xs uppercase">Index / 2024-2026</span>
+                    </div>
+
+                    <div class="grid grid-cols-1 sm:grid-cols-2 gap-6">
+                        <!-- Project Card -->
+                        <div class="border border-[#3a3633] p-5 bg-[#fbf9f5] hover:shadow-[4px_4px_0px_#2b2826] transition-shadow">
+                            <h3 class="font-headline font-bold text-xl mb-2">Vintage API Gateway</h3>
+                            <p class="font-typewriter text-xs leading-relaxed mb-4">Sebuah gateway custom menggunakan Nginx dan Node.js untuk me-routing traffic dari berbagai microservices lawas.</p>
+                            <div class="font-typewriter text-[10px] uppercase font-bold text-[#5a544f] border-t border-dashed border-[#a8a19a] pt-2">
+                                Tech: Node.js, Nginx, Docker
+                            </div>
+                        </div>
+
+                        <!-- Project Card -->
+                        <div class="border border-[#3a3633] p-5 bg-[#fbf9f5] hover:shadow-[4px_4px_0px_#2b2826] transition-shadow">
+                            <h3 class="font-headline font-bold text-xl mb-2">Lo-Fi Radio CLI</h3>
+                            <p class="font-typewriter text-xs leading-relaxed mb-4">Aplikasi pemutar musik command-line yang ringan untuk menemani coding session. Streaming langsung dari server personal.</p>
+                            <div class="font-typewriter text-[10px] uppercase font-bold text-[#5a544f] border-t border-dashed border-[#a8a19a] pt-2">
+                                Tech: Python, Bash, Audio API
+                            </div>
+                        </div>
+                    </div>
+                </section>
+            </div>
+
+            <!-- KOLOM KANAN (Kecil) : Profil, Skill, Sidebar -->
+            <aside class="md:col-span-4 md:border-l-2 md:border-[#3a3633] md:pl-8 mt-8 md:mt-0">
+                
+                <!-- Profil -->
+                <section id="about" class="mb-10">
+                    <h2 class="font-headline text-xl font-bold border-b border-[#3a3633] pb-2 mb-4">The Author</h2>
+                    <!-- Foto Profil Klasik (B&W filter) -->
+                    <div class="w-full h-48 bg-gray-300 border border-[#3a3633] mb-4 overflow-hidden grayscale contrast-125">
+                        <img src="https://images.unsplash.com/photo-1516259762381-22954d7d3ad2?ixlib=rb-4.0.3&auto=format&fit=crop&w=500&q=80" alt="Code on Screen" class="w-full h-full object-cover">
+                    </div>
+                    <p class="font-typewriter text-sm leading-relaxed text-justify mb-4">
+                        Menulis kode bukan sekadar merakit logika, melainkan merangkai arsitektur yang solid. Saya berfokus pada efisiensi <i>backend</i>, tata kelola <i>server</i>, dan mencari ketenangan lewat musik <i>lo-fi</i>.
+                    </p>
+                    <a href="#" class="font-typewriter text-sm font-bold uppercase ink-link">-> Download Resume (PDF)</a>
+                </section>
+
+                <!-- Skilset Area -->
+                <section class="mb-10">
+                    <h2 class="font-headline text-xl font-bold border-b border-[#3a3633] pb-2 mb-4">Technical Arsenal</h2>
+                    <ul class="font-typewriter text-sm space-y-2">
+                        <li class="flex justify-between border-b border-dashed border-[#d9d4c5] pb-1">
+                            <span>Backend</span> <span>Node.js, FastAPI</span>
+                        </li>
+                        <li class="flex justify-between border-b border-dashed border-[#d9d4c5] pb-1">
+                            <span>Infrastructure</span> <span>Docker, Nginx</span>
+                        </li>
+                        <li class="flex justify-between border-b border-dashed border-[#d9d4c5] pb-1">
+                            <span>OS & Env</span> <span>Linux, CLI, Git</span>
+                        </li>
+                        <li class="flex justify-between pb-1">
+                            <span>Audio</span> <span>FL Studio, MIDI</span>
+                        </li>
+                    </ul>
+                </section>
+
+                <!-- Widget Tambahan (Misal status server) -->
+                <section class="border border-[#3a3633] p-4 bg-[#e8e4d9]">
+                    <p class="font-typewriter text-[10px] uppercase font-bold tracking-widest text-[#5a544f] mb-2">System Status</p>
+                    <div class="flex items-center gap-2 font-typewriter text-sm">
+                        <span class="w-3 h-3 rounded-full bg-green-600 border border-[#3a3633] animate-pulse"></span>
+                        <span>Server is Online</span>
+                    </div>
+                    <p class="font-typewriter text-xs mt-2 text-[#4a4542]">Uptime: 99.9% / Ram: Stable</p>
+                </section>
+            </aside>
+
+        </main>
+
+        <!-- FOOTER -->
+        <footer class="mt-16 pt-6 border-t-4 border-double-ink flex flex-col md:flex-row justify-between items-center gap-4">
+            <p class="font-typewriter text-xs text-[#5a544f]">© 2026 Tomodachi. Printed in the terminal.</p>
+            <div class="flex gap-4 font-typewriter text-xs font-bold uppercase">
+                <a href="#" class="hover:text-[#9e3b22]">Github</a>
+                <a href="#" class="hover:text-[#9e3b22]">LinkedIn</a>
+                <a href="#" class="hover:text-[#9e3b22]">Medium</a>
+            </div>
+        </footer>
+
+    </div>
+
+</body>
+</html>

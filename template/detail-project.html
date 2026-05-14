@@ -1,0 +1,172 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Terminal Lo-Fi - Choco Mette</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    
+    <!-- Google Fonts: Space Grotesk & Space Mono -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;700;900&family=Space+Mono:ital,wght@0,400;0,700;1,400&display=swap" rel="stylesheet">
+    
+    <style>
+        body {
+            background-color: #FDFBF7;
+            color: #1A1A1A;
+            /* Pola dot-grid tipis ala komik */
+            background-image: radial-gradient(#1a1a1a 1px, transparent 1px);
+            background-size: 30px 30px;
+        }
+
+        .font-display { font-family: 'Space Grotesk', sans-serif; }
+        .font-mono { font-family: 'Space Mono', monospace; }
+
+        /* Utilitas Neo-Brutalism */
+        .brutal-border { border: 4px solid #1A1A1A; }
+        
+        .brutal-shadow {
+            box-shadow: 8px 8px 0px #1A1A1A;
+            transition: all 0.15s ease-in-out;
+        }
+
+        .brutal-shadow:hover {
+            transform: translate(4px, 4px);
+            box-shadow: 4px 4px 0px #1A1A1A;
+        }
+        
+        .brutal-shadow:active {
+            transform: translate(8px, 8px);
+            box-shadow: 0px 0px 0px #1A1A1A;
+        }
+
+        /* Warna Aksen Hangat */
+        .bg-mustard { background-color: #FFD23F; }
+        .bg-terracotta { background-color: #EE4266; }
+        .bg-sage { background-color: #0EAD69; }
+        .bg-retro-blue { background-color: #3BCEAC; }
+        .bg-warm-white { background-color: #FFFFFF; }
+        .bg-code-dark { background-color: #2b2b2b; color: #a9b7c6; }
+    </style>
+</head>
+<body class="antialiased min-h-screen flex flex-col items-center pb-20">
+
+    <nav class="w-full max-w-5xl px-4 py-6 md:py-10 flex flex-col md:flex-row justify-between items-center gap-6">
+        <a href="neo-brutalism.html" class="brutal-border brutal-shadow bg-warm-white px-6 py-2 rounded-xl group hover:bg-mustard transition-colors">
+            <h1 class="font-display font-black text-2xl tracking-tighter uppercase group-hover:-translate-x-1 transition-transform inline-block">&larr; Back to Base</h1>
+        </a>
+        
+        <div class="flex gap-2 font-mono text-xs font-bold uppercase bg-[#E8E6DF] brutal-border px-4 py-2 rounded-xl">
+            <span class="text-gray-500">Project / </span> <span>Terminal Lo-Fi</span>
+        </div>
+    </nav>
+
+    <main class="w-full max-w-5xl px-4 flex flex-col gap-12 mt-4">
+        
+        <header class="flex flex-col gap-6">
+            <div class="flex flex-wrap gap-2">
+                <span class="font-mono text-xs uppercase font-bold bg-[#1A1A1A] text-white brutal-border px-3 py-1 rounded-full">Bash</span>
+                <span class="font-mono text-xs uppercase font-bold bg-mustard text-[#1A1A1A] brutal-border px-3 py-1 rounded-full">Python</span>
+                <span class="font-mono text-xs uppercase font-bold bg-warm-white text-[#1A1A1A] brutal-border px-3 py-1 rounded-full">Audio API</span>
+            </div>
+            
+            <h1 class="font-display font-black text-5xl md:text-7xl uppercase leading-none tracking-tighter">
+                Terminal Lo-Fi Player
+            </h1>
+            
+            <p class="font-mono text-lg md:text-xl font-bold max-w-2xl border-l-8 border-terracotta pl-4 py-2 bg-warm-white/50">
+                Aplikasi CLI streaming audio ringan yang dirancang untuk developer yang ingin mendengarkan musik santai tanpa perlu membuka browser atau GUI berat.
+            </p>
+            
+            <div class="flex flex-wrap gap-4 mt-4">
+                <a href="#" class="brutal-border brutal-shadow bg-retro-blue px-6 py-3 rounded-xl uppercase font-display font-bold text-lg flex items-center gap-2 hover:bg-white transition-colors">
+                    <span>Source Code</span> <span>↗</span>
+                </a>
+                <a href="#" class="brutal-border brutal-shadow bg-mustard px-6 py-3 rounded-xl uppercase font-display font-bold text-lg flex items-center gap-2 hover:bg-white transition-colors">
+                    <span>Live Demo</span> <span>⚡</span>
+                </a>
+            </div>
+        </header>
+
+        <div class="w-full h-64 md:h-96 brutal-border brutal-shadow bg-mustard rounded-2xl overflow-hidden p-2 md:p-4">
+            <!-- Ini bisa berupa screenshot dashboard atau diagram -->
+            <img src="https://images.unsplash.com/photo-1551033406-611cf9a28f67?ixlib=rb-4.0.3&auto=format&fit=crop&w=1200&q=80" alt="Lo-Fi Radio Terminal Screenshot" class="w-full h-full object-cover brutal-border rounded-xl grayscale hover:grayscale-0 transition-all duration-500">
+        </div>
+
+        <article class="w-full max-w-3xl mx-auto space-y-8 font-mono text-base md:text-lg leading-relaxed">
+            
+            <div>
+                <h2 class="font-display font-black text-3xl uppercase mb-4 border-b-4 border-[#1A1A1A] pb-2 inline-block">Masalah & Solusi</h2>
+                <p class="mb-4">
+                    Saat melakukan <i>deployment</i> server atau mengonfigurasi <i>docker-compose</i>, sering kali kita harus fokus sepenuhnya pada terminal. Membuka tab Chrome atau aplikasi Spotify sering kali mengganggu <i>workflow</i> dan memakan RAM (terutama saat membuka banyak container).
+                </p>
+                <p>
+                    Sebagai solusinya, saya merakit <b>Terminal Lo-Fi</b>—sebuah pemutar musik berbasis Bash dan Python yang menarik stream audio ringan langsung dari stasiun radio Lofi Girl, lengkap dengan UI di terminal menggunakan <i>ncurses</i>.
+                </p>
+            </div>
+
+            <blockquote class="brutal-border brutal-shadow bg-[#E8E6DF] p-6 rounded-xl font-bold italic transform -rotate-1">
+                "Musik yang bagus untuk coding seharusnya terdengar di latar belakang, bukan menyedot resource sistem di latar depan."
+            </blockquote>
+
+            <div>
+                <h2 class="font-display font-black text-3xl uppercase mb-4 mt-8 border-b-4 border-[#1A1A1A] pb-2 inline-block">Arsitektur Eksekusi</h2>
+                <p class="mb-4">
+                    Aplikasi ini menggunakan modul Python <code>vlc-bindings</code> untuk menangani output audio agar kompatibel dengan <i>PulseAudio</i> di Linux, sementara Bash menangani visualisasi UI dan input perintah (seperti pause/play/skip).
+                </p>
+            </div>
+
+            <div class="brutal-border brutal-shadow bg-[#1A1A1A] rounded-xl overflow-hidden my-8">
+                <div class="flex gap-2 p-3 bg-gray-200 border-b-4 border-[#1A1A1A] items-center">
+                    <div class="w-3 h-3 rounded-full bg-terracotta border-2 border-[#1A1A1A]"></div>
+                    <div class="w-3 h-3 rounded-full bg-mustard border-2 border-[#1A1A1A]"></div>
+                    <div class="w-3 h-3 rounded-full bg-sage border-2 border-[#1A1A1A]"></div>
+                    <span class="text-[10px] font-bold uppercase ml-4 text-[#1A1A1A]">player.py</span>
+                </div>
+                <pre class="p-6 text-sm text-[#a9b7c6] overflow-x-auto"><code><span class="text-[#cc7832]">import</span> vlc
+<span class="text-[#cc7832]">import</span> time
+
+<span class="text-[#808080]"># Initialize standard VLC instance</span>
+instance = vlc.Instance(<span class="text-[#6a8759]">"--no-video"</span>)
+player = instance.media_player_new()
+
+<span class="text-[#cc7832]">def</span> <span class="text-[#ffc66d]">play_stream</span>(url):
+    media = instance.media_new(url)
+    player.set_media(media)
+    player.play()
+    
+    <span class="text-[#cc7832]">while</span> <span class="text-[#cc7832]">True</span>:
+        <span class="text-[#cc7832]">pass</span> <span class="text-[#808080]"># Keep script alive</span></code></pre>
+            </div>
+
+        </article>
+
+        <section class="mt-12 border-t-4 border-[#1A1A1A] pt-12">
+            <h2 class="font-display font-black text-3xl uppercase mb-8 text-center">Gallery / Screenshots</h2>
+            
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                <!-- Image 1 -->
+                <div class="brutal-border brutal-shadow bg-warm-white p-2 rounded-xl group cursor-pointer">
+                    <img src="https://images.unsplash.com/photo-1629654297299-c8506221ca97?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80" alt="Terminal UI" class="w-full h-48 object-cover brutal-border rounded-lg grayscale group-hover:grayscale-0 transition-all">
+                    <p class="font-mono text-xs font-bold mt-2 px-2 pb-1">Tampilan UI menggunakan library Ncurses di Ubuntu.</p>
+                </div>
+                <!-- Image 2 -->
+                <div class="brutal-border brutal-shadow bg-warm-white p-2 rounded-xl group cursor-pointer">
+                    <img src="https://images.unsplash.com/photo-1607799279861-4dddf8b60ddb?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80" alt="Process Monitor" class="w-full h-48 object-cover brutal-border rounded-lg grayscale group-hover:grayscale-0 transition-all">
+                    <p class="font-mono text-xs font-bold mt-2 px-2 pb-1">Penggunaan RAM di bawah 25MB saat streaming.</p>
+                </div>
+            </div>
+        </section>
+
+    </main>
+
+    <footer class="w-full max-w-5xl px-4 mt-20 mb-8 text-center border-t-4 border-[#1A1A1A] pt-8">
+        <h2 class="font-display font-black text-4xl uppercase tracking-tighter">Ready for the Next Build?</h2>
+        <a href="mailto:hello@chocomette.biz.id" class="font-mono text-lg font-bold bg-mustard brutal-border px-6 py-3 rounded-xl inline-block mt-4 brutal-shadow hover:bg-warm-white transition-colors uppercase">
+            Let's Talk
+        </a>
+    </footer>
+
+</body>
+</html>

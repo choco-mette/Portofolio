@@ -1,0 +1,114 @@
+Project NeoBrutalismPortfolio {
+  database_type: 'PostgreSQL'
+  Note: 'Database architecture with Polymorphic Media and Many-to-Many Skills'
+}
+
+Table users {
+  id bigserial [pk]
+  name varchar [not null]
+  email varchar [unique, not null]
+  password varchar [not null]
+  remember_token varchar
+  created_at timestamp
+  updated_at timestamp
+}
+
+Table experiences {
+  id bigserial [pk]
+  company varchar [not null]
+  title varchar [not null]
+  start_year varchar(4) [not null]
+  end_year varchar(10)
+  description text [not null]
+  is_active boolean [default: true]
+  sort_order integer [default: 0]
+  created_at timestamp
+  updated_at timestamp
+  Note: 'tech_stack jsonb dihapus, diganti relasi pivot'
+}
+
+Table projects {
+  id bigserial [pk]
+  title varchar [not null]
+  slug varchar [unique, not null]
+  summary varchar(255) [not null]
+  content text
+  cover_image varchar
+  repo_url varchar
+  live_url varchar
+  is_featured boolean [default: false]
+  sort_order integer [default: 0]
+  created_at timestamp
+  updated_at timestamp
+  Note: 'tech_stack jsonb dihapus, diganti relasi pivot'
+}
+
+Table skills {
+  id bigserial [pk]
+  name varchar [not null]
+  bg_color varchar [default: '#1A1A1A']
+  text_color varchar [default: '#FFFFFF']
+  is_highlighted boolean [default: true]
+  sort_order integer [default: 0]
+  created_at timestamp
+  updated_at timestamp
+}
+
+Table posts {
+  id bigserial [pk]
+  title varchar [not null]
+  published_date date [not null]
+  external_url varchar
+  content text
+  is_published boolean [default: true]
+  created_at timestamp
+  updated_at timestamp
+}
+
+// --------------------------------------------------------
+// POLYMORPHIC MEDIA TABLE
+// --------------------------------------------------------
+Table media {
+  id bigserial [pk]
+  model_type varchar [not null]
+  model_id bigint [not null]
+  collection_name varchar [default: 'default']
+  file_name varchar [not null]
+  file_url varchar [not null]
+  mime_type varchar
+  size bigint
+  sort_order integer [default: 0]
+  created_at timestamp
+  updated_at timestamp
+}
+
+// --------------------------------------------------------
+// PIVOT TABLES (Many-to-Many untuk Skills)
+// --------------------------------------------------------
+Table experience_skill {
+  experience_id bigint [not null]
+  skill_id bigint [not null]
+  Note: 'Pivot table untuk menghubungkan Experience dengan Skills'
+}
+
+Table project_skill {
+  project_id bigint [not null]
+  skill_id bigint [not null]
+  Note: 'Pivot table untuk menghubungkan Project dengan Skills'
+}
+
+// --------------------------------------------------------
+// RELATIONSHIPS
+// --------------------------------------------------------
+// Relasi Polymorphic Media
+Ref: media.model_id > projects.id
+Ref: media.model_id > posts.id
+Ref: media.model_id > experiences.id
+
+// Relasi Many-to-Many Experience <-> Skills
+Ref: experience_skill.experience_id > experiences.id
+Ref: experience_skill.skill_id > skills.id
+
+// Relasi Many-to-Many Project <-> Skills
+Ref: project_skill.project_id > projects.id
+Ref: project_skill.skill_id > skills.id
