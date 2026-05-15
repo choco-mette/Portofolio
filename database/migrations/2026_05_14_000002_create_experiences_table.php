@@ -12,8 +12,8 @@ return new class extends Migration
             $table->id(); // bigserial pk
             $table->string('company');
             $table->string('title');
-            $table->string('start_year', 4);
-            $table->string('end_year', 10)->nullable(); // nullable: still working = null/present
+            $table->date('start_year');
+            $table->date('end_year')->nullable(); // nullable: still working = null/present
             $table->text('description');
             $table->boolean('is_active')->default(true);
             $table->integer('sort_order')->default(0);

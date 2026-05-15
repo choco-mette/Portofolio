@@ -121,19 +121,9 @@
             <div class="brutal-border brutal-shadow bg-warm-white p-6 rounded-2xl flex-grow flex flex-col justify-center">
                 <h3 class="font-display font-bold text-xl uppercase mb-3 border-b-4 border-[#1A1A1A] pb-2">Tech Stack</h3>
                 <div class="flex flex-wrap gap-2 font-mono text-xs font-bold uppercase">
-                    <span class="bg-[#9D4EDD] text-white px-2 py-1 brutal-border rounded-lg hover:-translate-y-1 hover:shadow-[2px_2px_0px_#1a1a1a] transition-all cursor-default">PHP</span>
-                    <span class="bg-terracotta text-warm-white px-2 py-1 brutal-border rounded-lg hover:-translate-y-1 hover:shadow-[2px_2px_0px_#1a1a1a] transition-all cursor-default">Laravel</span>
-                    <span class="bg-sage text-warm-white px-2 py-1 brutal-border rounded-lg hover:-translate-y-1 hover:shadow-[2px_2px_0px_#1a1a1a] transition-all cursor-default">FastAPI</span>
-                    <span class="bg-mustard text-[#1A1A1A] px-2 py-1 brutal-border rounded-lg hover:-translate-y-1 hover:shadow-[2px_2px_0px_#1a1a1a] transition-all cursor-default">Python</span>
-                    <span class="bg-retro-blue text-[#1A1A1A] px-2 py-1 brutal-border rounded-lg hover:-translate-y-1 hover:shadow-[2px_2px_0px_#1a1a1a] transition-all cursor-default">PostgreSQL</span>
-                    <span class="bg-[#FFFFFF] text-[#1A1A1A] px-2 py-1 brutal-border rounded-lg hover:-translate-y-1 hover:shadow-[2px_2px_0px_#1a1a1a] transition-all cursor-default">MySQL</span>
-                    <span class="bg-[#2496ED] text-white px-2 py-1 brutal-border rounded-lg hover:-translate-y-1 hover:shadow-[2px_2px_0px_#1a1a1a] transition-all cursor-default">Docker</span>
-                    <span class="bg-sage text-warm-white px-2 py-1 brutal-border rounded-lg hover:-translate-y-1 hover:shadow-[2px_2px_0px_#1a1a1a] transition-all cursor-default">Nginx</span>
-                    <span class="bg-[#E8E6DF] text-[#1A1A1A] px-2 py-1 brutal-border rounded-lg hover:-translate-y-1 hover:shadow-[2px_2px_0px_#1a1a1a] transition-all cursor-default">Grafana</span>
-                    <span class="bg-terracotta text-warm-white px-2 py-1 brutal-border rounded-lg hover:-translate-y-1 hover:shadow-[2px_2px_0px_#1a1a1a] transition-all cursor-default">Prometheus</span>
-                    <span class="bg-mustard text-[#1A1A1A] px-2 py-1 brutal-border rounded-lg hover:-translate-y-1 hover:shadow-[2px_2px_0px_#1a1a1a] transition-all cursor-default">Linux / Bash</span>
-                    <span class="bg-[#FFFFFF] text-[#1A1A1A] px-2 py-1 brutal-border rounded-lg hover:-translate-y-1 hover:shadow-[2px_2px_0px_#1a1a1a] transition-all cursor-default">Redis</span>
-                    <span class="bg-retro-blue text-[#1A1A1A] px-2 py-1 brutal-border rounded-lg hover:-translate-y-1 hover:shadow-[2px_2px_0px_#1a1a1a] transition-all cursor-default">Git</span>
+                    @foreach($skills as $skill)
+                        <span style="background-color: {{ $skill->bg_color }}; color: {{ $skill->text_color }}" class="px-2 py-1 brutal-border rounded-lg hover:-translate-y-1 hover:shadow-[2px_2px_0px_#1a1a1a] transition-all cursor-default">{{ $skill->name }}</span>
+                    @endforeach
                 </div>
             </div>
         </div>
@@ -158,91 +148,44 @@
                 </div>
 
                 <div class="space-y-6">
-                    <!-- Experience Card 1 (DENGAN FUNGSI MODAL KLIK) -->
+                    @foreach($experiences as $experience)
                     <article onclick="openExpModal(this)" class="brutal-border brutal-shadow bg-warm-white rounded-2xl p-6 md:p-8 relative overflow-hidden group cursor-pointer hover:-translate-y-1 transition-all">
+                        @if(!$experience->end_year)
                         <div class="absolute top-0 right-0 bg-terracotta text-warm-white font-mono text-xs font-bold px-4 py-1 brutal-border border-t-0 border-r-0 rounded-bl-xl z-10">
                             Present
                         </div>
+                        @endif
                         
                         <div class="flex flex-col md:flex-row gap-6">
                             <div class="w-full md:w-1/4 flex flex-col justify-start pt-2">
-                                <span class="exp-period font-mono text-sm font-bold text-gray-500 border-b-2 border-dashed border-[#1A1A1A] pb-2 mb-2 w-max">2024 - 2026</span>
-                                <h4 class="company-name font-display font-black text-xl text-[#1A1A1A] uppercase leading-tight">TechCorp<br>Indonesia</h4>
+                                <span class="exp-period font-mono text-sm font-bold text-gray-500 border-b-2 border-dashed border-[#1A1A1A] pb-2 mb-2 w-max">{{ $experience->start_year->format('Y') }} - {{ $experience->end_year ? $experience->end_year->format('Y') : 'Present' }}</span>
+                                <h4 class="company-name font-display font-black text-xl text-[#1A1A1A] uppercase leading-tight">{!! nl2br(e($experience->company)) !!}</h4>
                             </div>
                             
                             <div class="w-full md:w-3/4 md:border-l-4 border-[#1A1A1A] md:pl-8">
-                                <h3 class="job-title font-display font-black text-2xl md:text-3xl uppercase mb-2 group-hover:text-terracotta transition-colors">Backend Engineer</h3>
-                                <p class="font-mono text-sm leading-relaxed font-bold text-gray-700 mb-4">
-                                    Merancang arsitektur microservices yang scalable menggunakan Laravel dan Node.js. Memimpin migrasi infrastruktur dari VPS monolitik ke ekosistem container.
-                                </p>
+                                <h3 class="job-title font-display font-black text-2xl md:text-3xl uppercase mb-2 group-hover:text-terracotta transition-colors">{{ $experience->title }}</h3>
+                                <div class="font-mono text-sm leading-relaxed font-bold text-gray-700 mb-4 line-clamp-2">
+                                    {!! Str::markdown($experience->description) !!}
+                                </div>
                                 
-                                <!-- CTA Buka Modal -->
                                 <div class="font-mono text-xs font-bold text-terracotta flex items-center gap-1 group-hover:text-[#1A1A1A] transition-colors mb-4">
                                     <span>Buka Detail Lengkap</span> <span class="text-lg leading-none">↗</span>
                                 </div>
                             </div>
                         </div>
 
-                        <!-- DATA TERSEMBUNYI UNTUK MODAL (Dipanggil JS) -->
                         <div class="hidden">
                             <div class="detail-desc font-mono text-sm md:text-base leading-relaxed font-bold text-gray-700 space-y-4">
-                                <p>Selama berada di TechCorp Indonesia, saya dipercaya untuk memimpin tim infrastruktur backend dengan tanggung jawab utama menstabilkan server saat lonjakan trafik bulanan.</p>
-                                <ul class="list-disc pl-5 space-y-2 mt-2">
-                                    <li>Memimpin migrasi 15 layanan monolitik ke arsitektur microservices berbasis Docker.</li>
-                                    <li>Menurunkan rata-rata <i>response time</i> API dari 400ms menjadi 120ms menggunakan Redis caching.</li>
-                                    <li>Menyiapkan CI/CD pipeline otomatis dengan GitHub Actions untuk deployment ke server produksi.</li>
-                                    <li>Merancang skema database PostgreSQL untuk menangani 1+ juta transaksi per hari.</li>
-                                </ul>
+                                {!! Str::markdown($experience->description) !!}
                             </div>
                             <div class="detail-tech">
-                                <span class="font-mono text-[10px] uppercase font-bold bg-[#1A1A1A] text-white brutal-border px-2 py-0.5 rounded-full">Laravel 10</span>
-                                <span class="font-mono text-[10px] uppercase font-bold bg-sage text-white brutal-border px-2 py-0.5 rounded-full">Docker</span>
-                                <span class="font-mono text-[10px] uppercase font-bold bg-retro-blue text-[#1A1A1A] brutal-border px-2 py-0.5 rounded-full">PostgreSQL</span>
-                                <span class="font-mono text-[10px] uppercase font-bold bg-mustard text-[#1A1A1A] brutal-border px-2 py-0.5 rounded-full">Redis</span>
-                                <span class="font-mono text-[10px] uppercase font-bold bg-[#1A1A1A] text-white brutal-border px-2 py-0.5 rounded-full">GitHub Actions</span>
+                                @foreach($experience->skills as $skill)
+                                <span style="background-color: {{ $skill->bg_color }}; color: {{ $skill->text_color }}" class="font-mono text-[10px] uppercase font-bold brutal-border px-2 py-0.5 rounded-full">{{ $skill->name }}</span>
+                                @endforeach
                             </div>
                         </div>
                     </article>
-
-                    <!-- Experience Card 2 (DENGAN FUNGSI MODAL KLIK) -->
-                    <article onclick="openExpModal(this)" class="brutal-border brutal-shadow bg-warm-white rounded-2xl p-6 md:p-8 relative overflow-hidden group cursor-pointer hover:-translate-y-1 transition-all">
-                        <div class="flex flex-col md:flex-row gap-6">
-                            <div class="w-full md:w-1/4 flex flex-col justify-start pt-2">
-                                <span class="exp-period font-mono text-sm font-bold text-gray-500 border-b-2 border-dashed border-[#1A1A1A] pb-2 mb-2 w-max">2022 - 2024</span>
-                                <h4 class="company-name font-display font-black text-xl text-[#1A1A1A] uppercase leading-tight">Agensi<br>Kreatif</h4>
-                            </div>
-                            
-                            <div class="w-full md:w-3/4 md:border-l-4 border-[#1A1A1A] md:pl-8">
-                                <h3 class="job-title font-display font-black text-2xl md:text-3xl uppercase mb-2 group-hover:text-retro-blue transition-colors">Web Developer</h3>
-                                <p class="font-mono text-sm leading-relaxed font-bold text-gray-700 mb-4">
-                                    Membangun dan memelihara puluhan website klien menggunakan CMS kustom dan PHP murni. Bertanggung jawab atas optimasi query database.
-                                </p>
-                                
-                                <!-- CTA Buka Modal -->
-                                <div class="font-mono text-xs font-bold text-retro-blue flex items-center gap-1 group-hover:text-[#1A1A1A] transition-colors mb-4">
-                                    <span>Buka Detail Lengkap</span> <span class="text-lg leading-none">↗</span>
-                                </div>
-                            </div>
-                        </div>
-
-                        <!-- DATA TERSEMBUNYI UNTUK MODAL -->
-                        <div class="hidden">
-                            <div class="detail-desc font-mono text-sm md:text-base leading-relaxed font-bold text-gray-700 space-y-4">
-                                <p>Sebagai pengembang awal di agensi ini, saya sering mengenakan banyak topi, mulai dari berurusan dengan database hingga konfigurasi server klien.</p>
-                                <ul class="list-disc pl-5 space-y-2 mt-2">
-                                    <li>Membangun CMS kustom berbasis PHP OOP yang digunakan oleh 20+ klien UMKM.</li>
-                                    <li>Melakukan tuning pada Nginx dan PHP-FPM untuk website e-commerce yang sering mengalami lonjakan traffic saat flash sale.</li>
-                                    <li>Mengoptimasi ratusan query MySQL yang mempercepat load halaman admin hingga 300%.</li>
-                                </ul>
-                            </div>
-                            <div class="detail-tech">
-                                <span class="font-mono text-[10px] uppercase font-bold bg-mustard text-[#1A1A1A] brutal-border px-2 py-0.5 rounded-full">PHP</span>
-                                <span class="font-mono text-[10px] uppercase font-bold bg-[#FFFFFF] text-[#1A1A1A] brutal-border px-2 py-0.5 rounded-full">MySQL</span>
-                                <span class="font-mono text-[10px] uppercase font-bold bg-[#1A1A1A] text-white brutal-border px-2 py-0.5 rounded-full">Nginx</span>
-                                <span class="font-mono text-[10px] uppercase font-bold bg-[#2496ED] text-white brutal-border px-2 py-0.5 rounded-full">Debian</span>
-                            </div>
-                        </div>
-                    </article>
+                    @endforeach
                 </div>
             </section>
 
@@ -254,39 +197,31 @@
                 </div>
 
                 <div class="grid grid-cols-1 sm:grid-cols-2 gap-6">
-                    <!-- Project Card 1 (Lo-Fi Terminal) -->
+                    @foreach($projects as $project)
                     <article class="brutal-border brutal-shadow bg-warm-white rounded-2xl flex flex-col overflow-hidden group cursor-pointer block h-full">
                         <div class="h-32 border-b-4 border-[#1A1A1A] bg-mustard p-3 flex items-center justify-center">
-                            <img src="https://images.unsplash.com/photo-1551033406-611cf9a28f67?ixlib=rb-4.0.3&auto=format&fit=crop&w=400&q=80" alt="Lo-Fi Radio" class="w-full h-full object-cover brutal-border rounded-xl grayscale group-hover:grayscale-0 transition-all">
+                            @if($project->cover_image)
+                            <img src="{{ Storage::disk('r2')->url($project->cover_image) }}" alt="{{ $project->title }}" class="w-full h-full object-cover brutal-border rounded-xl grayscale group-hover:grayscale-0 transition-all">
+                            @else
+                            <div class="w-full h-full bg-warm-white brutal-border rounded-xl flex items-center justify-center font-display font-black text-2xl uppercase opacity-50">{{ $project->title }}</div>
+                            @endif
                         </div>
                         <div class="p-5 flex flex-col flex-grow justify-between bg-warm-white">
                             <div>
-                                <h3 class="font-display font-black text-xl uppercase mb-1">Terminal Lo-Fi</h3>
-                                <p class="font-mono text-xs leading-relaxed font-bold text-gray-700 mb-4">Aplikasi CLI streaming audio ringan menggunakan Bash & Python.</p>
+                                <h3 class="font-display font-black text-xl uppercase mb-1">{{ $project->title }}</h3>
+                                <p class="font-mono text-xs leading-relaxed font-bold text-gray-700 mb-4">{{ $project->summary }}</p>
                             </div>
                             <div class="flex justify-between items-center mt-auto">
-                                <span class="font-mono text-[10px] uppercase font-bold bg-[#1A1A1A] text-white brutal-border px-2 py-1 rounded-md">Bash</span>
-                                <span class="text-xl group-hover:text-terracotta transition-colors">↗</span>
+                                <div class="flex flex-wrap gap-1">
+                                    @foreach($project->skills->take(3) as $skill)
+                                    <span style="background-color: {{ $skill->bg_color }}; color: {{ $skill->text_color }}" class="font-mono text-[10px] uppercase font-bold brutal-border px-2 py-1 rounded-md">{{ $skill->name }}</span>
+                                    @endforeach
+                                </div>
+                                <a href="{{ $project->live_url ?? $project->repo_url ?? '#' }}" target="_blank" class="text-xl group-hover:text-terracotta transition-colors">↗</a>
                             </div>
                         </div>
                     </article>
-
-                    <!-- Project Card 2 (Storage Wrapper) -->
-                    <article class="brutal-border brutal-shadow bg-warm-white rounded-2xl flex flex-col overflow-hidden group cursor-pointer block h-full">
-                        <div class="h-32 border-b-4 border-[#1A1A1A] bg-terracotta p-3 flex items-center justify-center">
-                            <img src="https://images.unsplash.com/photo-1544197150-b99a580bb7a8?ixlib=rb-4.0.3&auto=format&fit=crop&w=400&q=80" alt="R2 Wrapper" class="w-full h-full object-cover brutal-border rounded-xl grayscale group-hover:grayscale-0 transition-all">
-                        </div>
-                        <div class="p-5 flex flex-col flex-grow justify-between bg-warm-white">
-                            <div>
-                                <h3 class="font-display font-black text-xl uppercase mb-1">R2 CDN Bridge</h3>
-                                <p class="font-mono text-xs leading-relaxed font-bold text-gray-700 mb-4">Package Laravel custom untuk optimasi Cloudflare R2 Storage.</p>
-                            </div>
-                            <div class="flex justify-between items-center mt-auto">
-                                <span class="font-mono text-[10px] uppercase font-bold bg-[#FFFFFF] text-[#1A1A1A] brutal-border px-2 py-1 rounded-md">PHP/Laravel</span>
-                                <span class="text-xl group-hover:text-sage transition-colors">↗</span>
-                            </div>
-                        </div>
-                    </article>
+                    @endforeach
                 </div>
 
                 <!-- Tombol Show More -->
@@ -307,25 +242,30 @@
                 </div>
 
                 <div class="space-y-4">
-                    <!-- Blog Item 1 (Target for Laravel/Medium RSS loop) -->
-                    <a href="#" class="block bg-warm-white brutal-border p-4 rounded-xl brutal-shadow hover:bg-mustard transition-colors">
-                        <p class="font-mono text-[10px] font-bold text-gray-600 mb-1 border-b-2 border-dotted border-gray-400 pb-1">12 MAY 2026</p>
-                        <h3 class="font-display font-bold text-lg leading-tight mb-2">Membangun Microservices yang Tangguh dengan Docker</h3>
-                        <p class="font-mono text-xs font-bold text-terracotta uppercase">Read Article -></p>
-                    </a>
-
-                    <!-- Blog Item 2 -->
-                    <a href="#" class="block bg-warm-white brutal-border p-4 rounded-xl brutal-shadow hover:bg-sage transition-colors">
-                        <p class="font-mono text-[10px] font-bold text-gray-600 mb-1 border-b-2 border-dotted border-gray-400 pb-1">28 APR 2026</p>
-                        <h3 class="font-display font-bold text-lg leading-tight mb-2">Kenyamanan CLI: Kembali ke Terminal</h3>
-                        <p class="font-mono text-xs font-bold text-terracotta uppercase">Read Article -></p>
-                    </a>
+                    @if($mediumPosts->isEmpty())
+                        <p class="font-mono text-sm font-bold text-gray-500 italic">Terjadi gangguan sinyal ke server Medium...</p>
+                    @else
+                        @foreach($mediumPosts as $post)
+                            <a href="{{ $post['link'] }}" target="_blank" rel="noopener noreferrer" class="block bg-warm-white brutal-border p-4 rounded-xl brutal-shadow hover:bg-mustard transition-colors group">
+                                <p class="font-mono text-[10px] font-bold text-gray-600 mb-1 border-b-2 border-dotted border-[#1A1A1A]/30 pb-1 uppercase">
+                                    {{ $post['date'] }}
+                                </p>
+                                <h3 class="font-display font-bold text-lg leading-tight mb-2 group-hover:text-terracotta transition-colors">
+                                    {{ $post['title'] }}
+                                </h3>
+                                <p class="font-mono text-xs font-bold text-[#1A1A1A] uppercase flex items-center justify-between mt-3">
+                                    <span>Read Article</span>
+                                    <span class="text-lg leading-none group-hover:translate-x-2 transition-transform">→</span>
+                                </p>
+                            </a>
+                        @endforeach
+                    @endif
                     
                     <!-- Decorative Element -->
-                    <div class="mt-8 bg-terracotta text-warm-white brutal-border p-4 rounded-xl transform rotate-3 flex items-center justify-center gap-2">
+                    <a href="https://medium.com/@choco_mette" target="_blank" rel="noopener noreferrer" class="block mt-8 bg-terracotta text-warm-white brutal-border p-4 rounded-xl transform rotate-3 hover:rotate-0 flex items-center justify-center gap-2 transition-transform brutal-shadow hover:-translate-y-1">
                         <span class="font-display font-black text-xl uppercase">More on Medium</span>
                         <span class="text-2xl">✍️</span>
-                    </div>
+                    </a>
                 </div>
             </div>
         </aside>

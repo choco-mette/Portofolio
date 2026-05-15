@@ -2,6 +2,6 @@
 
 use Illuminate\Support\Facades\Route;
 
-Route::get('/', function () {
-    return view('landing');
-});
+use App\Http\Controllers\PortfolioController;
+
+Route::get('/', [PortfolioController::class, 'index'])->name('landing');
