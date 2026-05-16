@@ -60,4 +60,13 @@ class PortfolioController extends Controller
 
         return view('landing', compact('mediumPosts', 'skills', 'experiences', 'projects'));
     }
+
+    public function showProject($slug)
+    {
+        $project = Project::with('skills')->where('slug', $slug)->firstOrFail();
+        
+        $project->parsed_content = \Illuminate\Support\Str::markdown($project->content ?? '');
+
+        return view('projects.show', compact('project'));
+    }
 }
