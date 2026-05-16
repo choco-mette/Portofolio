@@ -27,6 +27,7 @@ class ExperienceResource extends Resource
                 Forms\Components\DatePicker::make('start_year')
                     ->required(),
                 Forms\Components\DatePicker::make('end_year')
+                    ->afterOrEqual('start_year')
                     ->placeholder('Biarkan kosong jika masih bekerja di sini'),
                 Forms\Components\MarkdownEditor::make('description')
                     ->required()
