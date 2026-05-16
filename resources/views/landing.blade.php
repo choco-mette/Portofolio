@@ -113,7 +113,7 @@
             <!-- Avatar -->
             <div class="brutal-border brutal-shadow bg-retro-blue h-48 rounded-2xl overflow-hidden relative group cursor-pointer">
                 <!-- Using a placeholder image for the avatar -->
-                <img src="{{ Storage::disk('r2')->url('profile-picture/profile.jpeg') }}" alt="Profile Picture" class="w-full h-full object-cover object-[40%_60%] contrast-125 group-hover:grayscale-0 transition-all duration-300">
+                <img src="{{ Storage::disk('r2')->url('profile-picture/profile.jpeg') }}" alt="Profile Picture" class="w-full h-full object-cover object-[50%_61%] contrast-125 group-hover:grayscale-0 transition-all duration-300">
                 <div class="absolute bottom-2 left-2 bg-warm-white brutal-border px-2 py-1 text-xs font-mono font-bold">Status: Still Alive</div>
             </div>
             
@@ -149,7 +149,7 @@
 
                 <div class="space-y-6">
                     @foreach($experiences as $experience)
-                    <article onclick="openExpModal(this)" class="brutal-border brutal-shadow bg-warm-white rounded-2xl p-6 md:p-8 relative overflow-hidden group cursor-pointer hover:-translate-y-1 transition-all">
+                    <article onclick="openExpModal(this)" class="brutal-border brutal-shadow bg-warm-white rounded-2xl p-6 md:p-8 relative overflow-hidden group cursor-pointer hover:-translate-y-1 transition-all {{ $loop->index >= 3 ? 'hidden exp-hidden' : '' }}">
                         @if(!$experience->end_year)
                         <div class="absolute top-0 right-0 bg-terracotta text-warm-white font-mono text-xs font-bold px-4 py-1 brutal-border border-t-0 border-r-0 rounded-bl-xl z-10">
                             Present
@@ -166,11 +166,7 @@
                                 <h3 class="job-title font-display font-black text-2xl md:text-3xl uppercase mb-2 group-hover:text-terracotta transition-colors">{{ $experience->title }}</h3>
                                 <div class="font-mono text-sm leading-relaxed font-bold text-gray-700 mb-4 line-clamp-2">
                                     {!! Str::markdown($experience->description) !!}
-                                </div>
-                                
-                                <div class="font-mono text-xs font-bold text-terracotta flex items-center gap-1 group-hover:text-[#1A1A1A] transition-colors mb-4">
-                                    <span>Buka Detail Lengkap</span> <span class="text-lg leading-none">↗</span>
-                                </div>
+                                </div>                             
                             </div>
                         </div>
 
@@ -187,6 +183,15 @@
                     </article>
                     @endforeach
                 </div>
+
+                @if($experiences->count() > 3)
+                <div class="mt-8 flex justify-center" id="btn-more-exp-container">
+                    <button type="button" onclick="showAllExperiences()" class="brutal-border brutal-shadow bg-warm-white px-8 py-3 rounded-xl font-display font-black text-xl uppercase hover:bg-mustard transition-colors flex items-center gap-3 group active:translate-y-1 active:translate-x-1 active:shadow-none">
+                        Explore More Experience
+                        <span class="text-2xl group-hover:translate-y-1 transition-transform">↓</span>
+                    </button>
+                </div>
+                @endif
             </section>
 
             <!-- SECTION 2: PROJECTS (Proyek Personal/Eksperimen) -->
@@ -373,6 +378,13 @@
                 closeExpModal();
             }
         });
+
+        function showAllExperiences() {
+            document.querySelectorAll('.exp-hidden').forEach(el => {
+                el.classList.remove('hidden', 'exp-hidden');
+            });
+            document.getElementById('btn-more-exp-container').style.display = 'none';
+        }
     </script>
 </body>
 </html>
