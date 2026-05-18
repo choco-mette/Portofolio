@@ -11,120 +11,10 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;700;900&family=Space+Mono:ital,wght@0,400;0,700;1,400&display=swap" rel="stylesheet">
     
-    <style>
-        body {
-            background-color: #FDFBF7;
-            color: #1A1A1A;
-            /* Pola dot-grid tipis ala komik */
-            background-image: radial-gradient(#1a1a1a 1px, transparent 1px);
-            background-size: 30px 30px;
-        }
-
-        .font-display { font-family: 'Space Grotesk', sans-serif; }
-        .font-mono { font-family: 'Space Mono', monospace; }
-
-        /* Utilitas Neo-Brutalism */
-        .brutal-border { border: 4px solid #1A1A1A; }
-        
-        .brutal-shadow {
-            box-shadow: 8px 8px 0px #1A1A1A;
-            transition: all 0.15s ease-in-out;
-        }
-
-        .brutal-shadow:hover {
-            transform: translate(4px, 4px);
-            box-shadow: 4px 4px 0px #1A1A1A;
-        }
-        
-        .brutal-shadow:active {
-            transform: translate(8px, 8px);
-            box-shadow: 0px 0px 0px #1A1A1A;
-        }
-
-        /* Warna Aksen Hangat */
-        .bg-mustard { background-color: #FFD23F; }
-        .bg-terracotta { background-color: #EE4266; }
-        .bg-sage { background-color: #0EAD69; }
-        .bg-retro-blue { background-color: #3BCEAC; }
-        .bg-warm-white { background-color: #FFFFFF; }
-        .bg-code-dark { background-color: #2b2b2b; color: #a9b7c6; }
-
-        /* Markdown Styles */
-        .markdown-content {
-            font-family: 'Space Mono', monospace;
-            font-size: 1.125rem;
-            line-height: 1.625;
-        }
-        .markdown-content h1, .markdown-content h2, .markdown-content h3 {
-            font-family: 'Space Grotesk', sans-serif;
-            font-weight: 900;
-            text-transform: uppercase;
-            border-bottom: 4px solid #1A1A1A;
-            padding-bottom: 0.5rem;
-            display: inline-block;
-            margin-top: 2rem;
-            margin-bottom: 1rem;
-        }
-        .markdown-content h1 { font-size: 2.25rem; }
-        .markdown-content h2 { font-size: 1.875rem; }
-        .markdown-content h3 { font-size: 1.5rem; }
-        .markdown-content p { margin-bottom: 1rem; }
-        .markdown-content strong { font-weight: bold; }
-        .markdown-content em { font-style: italic; }
-        .markdown-content blockquote {
-            border: 4px solid #1A1A1A;
-            box-shadow: 8px 8px 0px #1A1A1A;
-            background-color: #E8E6DF;
-            padding: 1.5rem;
-            border-radius: 0.75rem;
-            font-weight: bold;
-            font-style: italic;
-            transform: rotate(-1deg);
-            margin: 2rem 0;
-        }
-        .markdown-content pre {
-            border: 4px solid #1A1A1A;
-            box-shadow: 8px 8px 0px #1A1A1A;
-            background-color: #1A1A1A;
-            color: #a9b7c6;
-            padding: 1.5rem;
-            border-radius: 0.75rem;
-            overflow-x: auto;
-            margin: 2rem 0;
-            font-size: 0.875rem;
-        }
-        .markdown-content code {
-            background-color: #E8E6DF;
-            padding: 0.2rem 0.4rem;
-            border: 2px solid #1A1A1A;
-            border-radius: 0.25rem;
-            font-size: 0.875em;
-            color: #1A1A1A;
-        }
-        .markdown-content pre code {
-            background-color: transparent;
-            padding: 0;
-            border: none;
-            color: inherit;
-        }
-        .markdown-content ul {
-            list-style-type: square;
-            padding-left: 1.5rem;
-            margin-bottom: 1rem;
-        }
-        .markdown-content li { margin-bottom: 0.5rem; }
-        .markdown-content a {
-            color: #EE4266;
-            text-decoration: underline;
-            text-decoration-thickness: 2px;
-            text-underline-offset: 4px;
-            font-weight: bold;
-        }
-        .markdown-content a:hover {
-            background-color: #EE4266;
-            color: white;
-        }
-    </style>
+    <!-- Highlight.js for Syntax Highlighting -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/styles/atom-one-dark.min.css">
+    
+    <link rel="stylesheet" href="{{ asset('css/neo-brutalism.css') }}">
 </head>
 <body class="antialiased min-h-screen flex flex-col items-center pb-20">
 
@@ -175,12 +65,12 @@
         </header>
 
         @if($project->cover_image)
-        <div class="w-full h-64 md:h-96 brutal-border brutal-shadow bg-mustard rounded-2xl overflow-hidden p-2 md:p-4">
+        <div class="w-full h-64 md:h-96 brutal-border brutal-shadow bg-mustard rounded-2xl overflow-hidden p-2 md:p-2">
             <img src="{{ Storage::disk('r2')->url($project->cover_image) }}" alt="{{ $project->title }}" class="w-full h-full object-cover brutal-border rounded-xl grayscale hover:grayscale-0 transition-all duration-500">
         </div>
         @endif
 
-        <article class="w-full max-w-3xl mx-auto space-y-8 font-mono text-base md:text-lg leading-relaxed markdown-content mt-12">
+        <article class="w-full max-w-5xl mx-auto space-y-8 font-mono text-base md:text-lg leading-relaxed markdown-content brutal-border brutal-shadow bg-warm-white p-6 md:p-12 rounded-2xl">
             {!! $project->parsed_content !!}
         </article>
 
@@ -193,5 +83,12 @@
         </a>
     </footer>
 
+    <!-- Highlight.js Script -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/highlight.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/languages/bash.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/languages/php.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/languages/javascript.min.js"></script>
+    
+    <script src="{{ asset('js/neo-brutalism.js') }}"></script>
 </body>
 </html>

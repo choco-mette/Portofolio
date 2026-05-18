@@ -11,76 +11,7 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;700;900&family=Space+Mono:ital,wght@0,400;0,700;1,400&display=swap" rel="stylesheet">
     
-    <style>
-        body {
-            background-color: #FDFBF7; /* Krem kertas sangat terang dan hangat */
-            color: #1A1A1A;
-            /* Pola dot-grid tipis ala majalah komik/pop-art */
-            background-image: radial-gradient(#1a1a1a 1px, transparent 1px);
-            background-size: 30px 30px;
-            background-color: #FDFBF7;
-        }
-
-        .font-display { font-family: 'Space Grotesk', sans-serif; }
-        .font-mono { font-family: 'Space Mono', monospace; }
-
-        /* Utilitas Neo-Brutalism: Bayangan Solid & Border Tebal */
-        .brutal-border {
-            border: 4px solid #1A1A1A;
-        }
-
-        .brutal-shadow {
-            box-shadow: 8px 8px 0px #1A1A1A;
-            transition: all 0.15s ease-in-out;
-        }
-
-        .brutal-shadow:hover {
-            transform: translate(4px, 4px);
-            box-shadow: 4px 4px 0px #1A1A1A;
-        }
-        
-        .brutal-shadow:active {
-            transform: translate(8px, 8px);
-            box-shadow: 0px 0px 0px #1A1A1A;
-        }
-
-        /* Marquee Animation (Efek teks berjalan ala 90s TV) */
-        .marquee-container {
-            overflow: hidden;
-            white-space: nowrap;
-            width: 100%;
-            border-top: 4px solid #1A1A1A;
-            border-bottom: 4px solid #1A1A1A;
-            background-color: #FFD23F; /* Kuning Mustard */
-        }
-        
-        .marquee-content {
-            display: inline-block;
-            animation: marquee 15s linear infinite;
-            font-weight: 900;
-        }
-
-        @keyframes marquee {
-            0% { transform: translateX(0); }
-            100% { transform: translateX(-50%); }
-        }
-
-        /* Warna Aksen Hangat */
-        .bg-mustard { background-color: #FFD23F; }
-        .bg-terracotta { background-color: #EE4266; }
-        .bg-sage { background-color: #0EAD69; }
-        .bg-retro-blue { background-color: #3BCEAC; }
-        .bg-warm-white { background-color: #FFFFFF; }
-
-        /* Modal Animation (Tambahan untuk Pop-up) */
-        @keyframes popIn {
-            0% { transform: scale(0.95) translateY(10px); opacity: 0; }
-            100% { transform: scale(1) translateY(0); opacity: 1; }
-        }
-        .modal-animate {
-            animation: popIn 0.2s cubic-bezier(0.175, 0.885, 0.32, 1.275) forwards;
-        }
-    </style>
+    <link rel="stylesheet" href="{{ asset('css/neo-brutalism.css') }}">
 </head>
 <body class="antialiased min-h-screen flex flex-col items-center pb-20">
 
@@ -203,7 +134,7 @@
 
                 <div class="grid grid-cols-1 sm:grid-cols-2 gap-6">
                     @foreach($projects as $project)
-                    <a href="{{ route('project.show', $project->slug) }}" class="brutal-border brutal-shadow bg-warm-white rounded-2xl flex flex-col overflow-hidden group cursor-pointer block h-full">
+                    <a href="{{ route('project.show', $project->slug) }}" class="brutal-border brutal-shadow bg-warm-white rounded-2xl flex flex-col overflow-hidden group cursor-pointer block h-full {{ $loop->index >= 4 ? 'hidden proj-hidden' : '' }}">
                         <div class="h-32 border-b-4 border-[#1A1A1A] bg-mustard p-3 flex items-center justify-center">
                             @if($project->cover_image)
                             <img src="{{ Storage::disk('r2')->url($project->cover_image) }}" alt="{{ $project->title }}" class="w-full h-full object-cover brutal-border rounded-xl grayscale group-hover:grayscale-0 transition-all">
@@ -229,13 +160,15 @@
                     @endforeach
                 </div>
 
+                @if($projects->count() > 4)
                 <!-- Tombol Show More -->
-                <div class="mt-10 flex justify-center">
-                    <a href="#" class="brutal-border brutal-shadow bg-warm-white px-8 py-3 rounded-xl font-display font-black text-xl uppercase hover:bg-mustard transition-colors flex items-center gap-3 group active:translate-y-1 active:translate-x-1 active:shadow-none">
+                <div class="mt-10 flex justify-center" id="btn-more-proj-container">
+                    <button type="button" onclick="showAllProjects()" class="brutal-border brutal-shadow bg-warm-white px-8 py-3 rounded-xl font-display font-black text-xl uppercase hover:bg-mustard transition-colors flex items-center gap-3 group active:translate-y-1 active:translate-x-1 active:shadow-none">
                         Explore More Projects
-                        <span class="text-2xl group-hover:translate-x-2 transition-transform">→</span>
-                    </a>
+                        <span class="text-2xl group-hover:translate-y-1 transition-transform">↓</span>
+                    </button>
                 </div>
+                @endif
             </section>
         </div>
 
@@ -341,50 +274,8 @@
     </div>
 
     <!-- ========================================== -->
-    <!-- SCRIPT UNTUK LOGIKA MODAL                  -->
+    <!-- SCRIPT UTAMA                               -->
     <!-- ========================================== -->
-    <script>
-        function openExpModal(element) {
-            // 1. Ekstrak data dari kelas di dalam Card yang diklik
-            const company = element.querySelector('.company-name').innerHTML;
-            const period = element.querySelector('.exp-period').innerHTML;
-            const jobTitle = element.querySelector('.job-title').innerHTML;
-            const detailDesc = element.querySelector('.detail-desc').innerHTML;
-            const detailTech = element.querySelector('.detail-tech').innerHTML;
-
-            // 2. Suntikkan (inject) data tersebut ke dalam elemen DOM Modal
-            document.getElementById('modal-company').innerHTML = company;
-            document.getElementById('modal-period').innerHTML = period;
-            document.getElementById('modal-job-title').innerHTML = jobTitle;
-            document.getElementById('modal-desc').innerHTML = detailDesc;
-            document.getElementById('modal-tech').innerHTML = detailTech;
-
-            // 3. Tampilkan Modal & Kunci Scroll Halaman Utama (Background body)
-            const modal = document.getElementById('exp-modal');
-            modal.classList.remove('hidden');
-            document.body.style.overflow = 'hidden';
-        }
-
-        function closeExpModal() {
-            // Sembunyikan Modal & Kembalikan kemampuan Scroll
-            const modal = document.getElementById('exp-modal');
-            modal.classList.add('hidden');
-            document.body.style.overflow = 'auto';
-        }
-
-        // Opsional: Tutup modal kalau user menekan tombol 'Escape' di keyboard
-        document.addEventListener('keydown', function(event) {
-            if (event.key === "Escape") {
-                closeExpModal();
-            }
-        });
-
-        function showAllExperiences() {
-            document.querySelectorAll('.exp-hidden').forEach(el => {
-                el.classList.remove('hidden', 'exp-hidden');
-            });
-            document.getElementById('btn-more-exp-container').style.display = 'none';
-        }
-    </script>
+    <script src="{{ asset('js/neo-brutalism.js') }}"></script>
 </body>
 </html>

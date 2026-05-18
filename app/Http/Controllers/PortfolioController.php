@@ -17,7 +17,7 @@ class PortfolioController extends Controller
     {
         $skills = Skill::where('is_highlighted', true)->orderBy('sort_order')->get();
         $experiences = Experience::with('skills')->where('is_active', true)->orderBy('start_year', 'desc')->get();
-        $projects = Project::with('skills')->orderBy('sort_order')->get();
+        $projects = Project::with('skills')->orderBy('created_at', 'desc')->get();
 
         $mediumPosts = Cache::remember('medium_posts', 43200, function () {
             try {
