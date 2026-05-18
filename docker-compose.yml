@@ -1,0 +1,25 @@
+version: '3.8'
+
+services:
+  app:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    image: choco-mette-portfolio:latest
+    container_name: choco_portfolio_app
+    restart: unless-stopped
+    ports:
+      - "8084:80"
+    env_file:
+      - .env
+    deploy:
+      resources:
+        limits:
+          cpus: '0.50'
+          memory: 512M
+        reservations:
+          cpus: '0.25'
+          memory: 256M
+    # No volumes mapped since this is a stateless container!
+    # Database is handled by Supabase PostgreSQL.
+    # Storage is handled by Cloudflare R2.
